@@ -1,0 +1,369 @@
+.col1 {
+	margin: 0 auto;
+	width: 12.5%;
+}
+
+.col2 {
+	margin: 0 auto;
+	width: 25%;
+}
+
+.col3 {
+	width: 37.5%;
+}
+
+.col4 {
+	width: 50%;
+}
+
+.col5 {
+	width: 62.5%;
+}
+
+.col6 {
+	width: 75%;
+}
+
+.col7 {
+	width: 87.5%;
+}
+
+.col8 {
+	width: 100%;
+}
+
+.column {
+	float: left;
+}
+
+.dark-gray {
+	background-color: #999;
+	padding: 12px 4px;
+}
+
+.medium-gray {
+	background-color: transparent;
+}
+
+.light-gray {
+	background-color: transparent;
+	clear: both;
+}
+
+#bottom-full-width #main-column #main-content {
+	height: auto;
+}
+
+#bottom-full-width #main-column #main-content #Administration {
+	padding: 0;
+	width: auto;
+}
+
+#top-row {
+	background-color: #666;
+	padding: 10px 0;
+}
+
+.topbox  {
+	margin: 0 auto;
+}
+
+.topbox img {
+	float: left;
+	height: auto;
+	margin-right: 8px;
+	width: 98px;
+}
+
+p {
+	color: #FFF;
+}
+
+a, a:link, a:visited, a:hover, a:active {
+	color: #FFF;
+}
+
+#body #main-content .light-gray p,
+#body #main-content .medium-gray p,
+#body #main-content .dark-gray p {
+	font-family: "HelveticaNeueW01-57Cn",Helvetica,Verdana,Arial,sans-serif;
+	font-size: 8px;
+}
+
+#body #main-content .topbox.medium-gray p {
+	font-size: 10px;
+}
+
+#row2 {
+	background-color: #E0DEDF;
+}
+
+#row2 .wrapper {
+	background-image: url('../images/chart-columns-bg.png');
+	background-repeat:repeat-y;
+}
+
+.light-gray a, .medium-gray a, .dark-gray a {
+	font-family: "HelveticaNeueW01-77BdCn 692722",Helvetica,Verdana,Arial,sans-serif;
+	font-size: 11px;
+}
+
+.medium-gray.topbox a {
+	font-size: 13px;
+}
+
+.light-gray a, .light-gray p {
+	color: #000;
+}
+
+#row2 .dark-gray img {
+	margin-right: 4px;
+	width: 57px;
+}
+
+.level3column {
+	padding: 10px 7px 0 7px;
+}
+
+
+#row2 .level3box img {
+	margin-bottom: 20px;
+	width: 42px;
+}
+
+#body #main-content #row2 .level3box p {
+	margin-bottom: 20px;
+	margin-left: 47px;
+}
+
+/*************************************************************************************************************************
+* LAYOUT #4 LAYOUT #4 LAYOUT #4 LAYOUT #4 LAYOUT #4 LAYOUT #4 LAYOUT #4 LAYOUT #4 *LAYOUT #4 LAYOUT #4 LAYOUT #4 LAYOUT #4 *
+*************************************************************************************************************************/ 
+
+
+/*      Mobile Layout: 320px.
+        Gutters: 24px.
+        Outer margins: 34px.
+        Inherits styles from: Default Layout.
+---------------------------------------------
+cols    1     2      3
+px      68    160    252    */
+
+@media only screen and (max-width: 997px) {
+	
+.col1, .col2, .col3, .col4, .col5, .col6, .col7, .col8 {
+	width: 100%;
+}
+
+#bottom-full-width #main-column #main-content {
+	height: auto;
+	padding-bottom: 20px;
+}
+
+#top-row {
+	background-color: transparent;
+}
+
+#wrapper {
+	padding-top: 30px;
+	width: 100%;
+}
+
+.topbox {
+	margin-bottom: 30px;
+	padding: 8px;
+	width: auto;
+}
+
+.medium-gray {
+	background-color: #B7B7B7;
+}
+
+#body #main-content .topbox.medium-gray p {
+	font-size: 14px;
+}
+
+.medium-gray.topbox a {
+	font-size: 18px;
+}
+
+#main-content #Administration .topbox img {
+	margin-bottom: 6px;
+}
+
+#row2 {
+	background-color: transparent;
+}
+
+#row2 .wrapper {
+	padding: 0;
+	width: 100%;
+}
+
+#body #main-content .light-gray p, #body #main-content .medium-gray p, #body #main-content .dark-gray p {
+	font-size: 14px;
+}
+
+.light-gray a, .medium-gray a, .dark-gray a {
+	font-size: 18px;
+}
+
+#main-content .width122 {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 122px;
+	width: 100%;
+}
+
+#row2 .dark-gray img {
+	width: auto;
+}
+
+#main-content .width112 {
+	margin-bottom: 15px;
+	max-width: 112px;
+	width: 45%;
+}
+
+#main-content #Administration img {
+	margin: 0 auto;
+}
+
+.block {
+	display: block;
+}
+
+.column {
+	float: left;
+	width: 100%;
+	margin-right: 12px;
+}
+
+#main-content .width280 {
+	margin: 0 auto;
+	width: 280px;
+}
+
+#main-content .width256 {
+	margin: 0 12px 0 0;
+	max-width: 256px;
+	position: relative;
+	width: 100%;
+}
+
+#main-content .width248 {
+	margin: 0 auto;
+	width: 248px;
+}
+.floatleft {
+	float: left;
+	clear: none;
+}
+
+.aligncenter {
+	margin: 0 auto;
+}
+
+.dark-gray {
+	padding: 12px 11px;
+}
+
+.light-gray {
+	background-color: #E0DEDF;
+}
+
+.marginleft52percent {
+	margin-left: 52% !important;
+}
+
+#main-content #Administration .triangle { 
+	bottom: 0;
+	margin-bottom: 12px;
+	margin-left: 58%;
+	position: absolute;
+}
+
+a.triangle {
+	background-image: url('../images/triangle-down.png');
+	display: block;
+	height: 28px;
+	width: 75px;
+}
+
+a.triangle:hover {
+	cursor: pointer;
+}
+
+a.triangle.up {
+	background-image: url('../images/triangle.png');
+	display: block;
+	height: 28px;
+	width: 75px;
+}
+
+.level3column {
+	padding: 22px 22px 0 8px;
+}
+
+.level3box.floatleft {
+	margin-left: 12px;
+}
+
+#row2 {
+	margin: 0 auto;
+}
+
+#row2 .wrapper {
+	background-image: none;
+}
+
+.column {
+	float: none;
+	margin: 0 auto 12px auto;
+}
+
+#bottom-full-width #main-column #main-content #Administration {
+	padding: 0;
+}
+
+#main-content, #main-column-wide #main-content {
+	max-width: none;
+}
+
+#main-content .width256 {
+	margin: 0 auto;
+}
+	
+#row2 {
+	width: 87.5%;
+}
+
+#main-content #Administration #row2 .level3box img {
+	margin-bottom: 6px;
+	width: 100%;
+}
+
+#body #main-content #row2 .level3box p {
+	margin-left: 0;
+}
+
+}
+
+/*************************************************************************************************************************
+* LAYOUT #3 LAYOUT #3 LAYOUT #3 LAYOUT #3 LAYOUT #3 LAYOUT #3 LAYOUT #3 LAYOUT #3 LAYOUT #3 LAYOUT #3 LAYOUT #3 *
+*************************************************************************************************************************/ 
+
+/*      Wide Mobile Layout: 480px.
+        Gutters: 24px.
+        Outer margins: 22px.
+        Inherits styles from: Default Layout, Mobile Layout.
+------------------------------------------------------------
+cols    1     2      3      4      5
+px      68    160    252    344    436    */
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+	
+
+
+
+}

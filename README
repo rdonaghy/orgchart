@@ -1,1 +1,5 @@
-This is the readme file for the orgchart.
+Original commit of orgchart was just the README file on 11/27/13.
+
+Second commit contains code with desktop and mobile HTML & CSS.
+
+Web page uses one break point: 998px.
