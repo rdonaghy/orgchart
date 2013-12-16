@@ -1,35 +1,35 @@
 .col1 {
 	margin: 0 auto;
-	width: 12.5%;
+	width: 100%;
 }
 
 .col2 {
 	margin: 0 auto;
-	width: 25%;
-}
-
-.col3 {
-	width: 37.5%;
-}
-
-.col4 {
 	width: 50%;
 }
 
+.col3 {
+	width: 33.3%;
+}
+
+.col4 {
+	width: 25%;
+}
+
 .col5 {
-	width: 62.5%;
+	width: 20%;
 }
 
 .col6 {
-	width: 75%;
+	width: 16.7%;
 }
 
 .col7 {
-	width: 87.5%;
+	width: 14.2%;
 }
 
 .col8 {
-	width: 100%;
+	width: 12.5%;
 }
 
 .column {
