@@ -64,6 +64,11 @@
 	padding: 10px 0;
 }
 
+#top-row .col5 {
+	float: none;
+	margin: 0 auto;
+}
+
 .topbox  {
 	margin: 0 auto;
 }
@@ -302,6 +307,7 @@ a.triangle.up {
 }
 
 .level3column {
+	display: none;
 	padding: 22px 22px 0 8px;
 }
 

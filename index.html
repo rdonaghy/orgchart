@@ -23,15 +23,42 @@
 </script>
 <script src="http://www.northeastern.edu/scripts/top-nav.js" type="text/javascript"></script>
 <script type="text/javascript">
+function hideLevelThree(){
+	if ($(document).width() < 992) {
+	    $(".level3column").fadeOut();
+    } else {
+        $(".level3column").fadeIn();
+    }
+}
+	
 $( document ).ready(function() {
-	var docWidth = $(document).width();
-    if(docWidth < 768) {
-		$('.level3column').hide();
+	hideLevelThree();
+	/*$('.triangle').click(function() {
+		$(this).parents('.dark-gray').next().slideToggle();
+		$(this).toggleClass('up');
+	});*/
+	$(window).resize(function(){
+        hideLevelThree();
+    });
+	
+	if($(document).width() < 992) {
 		$('.triangle').click(function() {
 			$(this).parents('.dark-gray').next().slideToggle();
 			$(this).toggleClass('up');
 		});
 	}
+	
+	/* $( window ).resize(function() {
+		if(docWidth < 992) {
+			$('.level3column').hide();
+			$('.triangle').click(function() {
+				$(this).parents('.dark-gray').next().slideToggle();
+				$(this).toggleClass('up');
+			});
+		}
+	}); */
+	// $( "body" ).prepend( "<div>" + $( window ).width() + "</div>" );
+
 });
 </script>
 <script src="http://www.google.com/jsapi?key=ABQIAAAA780chNBk5tiRKRznXzEY7xSxdZHYPQylHhIz0QB7o5q20wZANRT7zKV0vSe8OLWkSnyFORSqcquYig" type="text/javascript">
@@ -384,7 +411,7 @@ $( document ).ready(function() {
                             <div id="Administration">
                             	<div id="top-row">
                                 	<div id="wrapper">
-                                		<div class="col2">
+                                		<div class="column col5">
 	                                    	<div class="medium-gray topbox width122"> <a href="http://www.northeastern.edu/president/"><img alt="Aoun" src="images/orgchart/headshots/aoun.jpg" class="width122 block" /></a>
     	                                    	<p class="width122"> <a href="http://www.northeastern.edu/president/">Joseph E. Aoun</a><br/>
                                                 President</p>
@@ -463,12 +490,7 @@ $( document ).ready(function() {
     	                                            <p> <a href="http://www.northeastern.edu/dmsb/">J. Murray Gibson</a><br/>
                                                     Dean College of Science </p>
         	                                    </div>
-            	                                <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Powers-Lee" src="images/orgchart/headshots/powerslee.jpg" /></a>
-                	                                <p> <a href="http://www.northeastern.edu/">Susan Powers-Lee</a><br/>
-                                                    Vice Provost Honors &amp; First-Year Programs </p>
-                    	                        </div>
-                                                <div class="clear"></div>
-                            	                <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/cssh/"><img class="floatleft" alt="Poiger" src="images/orgchart/headshots/poiger.jpg" /></a>
+            	                                <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/cssh/"><img class="floatleft" alt="Poiger" src="images/orgchart/headshots/poiger.jpg" /></a>
                                 	                <p> <a href="http://www.northeastern.edu/cssh/">Uta G. Poiger</a><br/>
                                                     Dean College of Social Sciences &amp; Humanities </p>
                                     	        </div>
