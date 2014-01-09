@@ -18,47 +18,75 @@
 <link href="http://www.northeastern.edu/homepage2013/css/menu-ie.css" media="screen" rel="stylesheet" type="text/css" />
 <![endif]-->
 <link href="css/chart.css" rel="stylesheet" type="text/css"/>
+<link href="../../../css/mobile-nav.css" media="screen" rel="stylesheet" type="text/css"/>
 <script src="http://www.northeastern.edu/scripts/modernizr.js" type="text/javascript"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript">
 </script>
 <script src="http://www.northeastern.edu/scripts/top-nav.js" type="text/javascript"></script>
 <script type="text/javascript">
-function hideLevelThree(){
-	if ($(document).width() < 992) {
-	    $(".level3column").fadeOut();
-    } else {
-        $(".level3column").fadeIn();
-    }
-}
-	
-$( document ).ready(function() {
-	hideLevelThree();
-	/*$('.triangle').click(function() {
-		$(this).parents('.dark-gray').next().slideToggle();
-		$(this).toggleClass('up');
-	});*/
-	$(window).resize(function(){
-        hideLevelThree();
-    });
-	
-	if($(document).width() < 992) {
-		$('.triangle').click(function() {
-			$(this).parents('.dark-gray').next().slideToggle();
-			$(this).toggleClass('up');
-		});
-	}
-	
-	/* $( window ).resize(function() {
-		if(docWidth < 992) {
-			$('.level3column').hide();
-			$('.triangle').click(function() {
-				$(this).parents('.dark-gray').next().slideToggle();
-				$(this).toggleClass('up');
-			});
+var waitForFinalEvent = (function () {
+	var timers = {};
+	return function (callback, ms, uniqueId) {
+		if (!uniqueId) {
+			uniqueId = "Don't call this twice without a uniqueId";
 		}
-	}); */
-	// $( "body" ).prepend( "<div>" + $( window ).width() + "</div>" );
+		if (timers[uniqueId]) {
+			clearTimeout (timers[uniqueId]);
+		}
+		timers[uniqueId] = setTimeout(callback, ms);
+	};
+})();
 
+function hideLevelThree() {
+	$(".level3column").hide();
+}
+function showLevelThree() {
+	$(".level3column").show();
+}
+
+function controlColumn() {
+	$('.triangle').click(function() {
+		if ($(this).hasClass('up')) {
+			$(this).removeClass('up');
+			$(this).parents('.dark-gray').next().slideUp();
+		} else {
+			$(this).addClass('up');
+			$(this).parents('.dark-gray').next().slideDown();
+		}
+	});
+}
+
+function toggleColumn() {
+	$('.triangle').not(".binded").addClass("binded").click(function() {
+		$(this).toggleClass('up');
+		$(this).parents('.dark-gray').next().toggle();
+	});
+}
+
+function clearUp() {
+	$('.triangle').removeClass('up');
+}
+
+$(document).ready(function() {
+	if ($(document).width() > 991) {
+		showLevelThree();
+		clearUp();
+	} else {
+		hideLevelThree();
+		toggleColumn();
+	}
+});		
+
+$(window).resize(function () {
+	waitForFinalEvent(function(){
+		if ($(document).width() > 991) {
+			showLevelThree();
+			clearUp();
+		} else {
+			hideLevelThree();
+			toggleColumn();
+		}
+	}, 500, "some unique string");
 });
 </script>
 <script src="http://www.google.com/jsapi?key=ABQIAAAA780chNBk5tiRKRznXzEY7xSxdZHYPQylHhIz0QB7o5q20wZANRT7zKV0vSe8OLWkSnyFORSqcquYig" type="text/javascript">
@@ -412,8 +440,8 @@ $( document ).ready(function() {
                             	<div id="top-row">
                                 	<div id="wrapper">
                                 		<div class="column col5">
-	                                    	<div class="medium-gray topbox width122"> <a href="http://www.northeastern.edu/president/"><img alt="Aoun" src="images/orgchart/headshots/aoun.jpg" class="width122 block" /></a>
-    	                                    	<p class="width122"> <a href="http://www.northeastern.edu/president/">Joseph E. Aoun</a><br/>
+	                                    	<div class="medium-gray topbox width122"> <a href="http://www.northeastern.edu/president/"><img alt="Aoun" src="images/orgchart/headshots/aoun.jpg" class="width122 display-block" /></a>
+    	                                    	<p class="width122"><span class="name"><a href="http://www.northeastern.edu/president/">Joseph E. Aoun</a></span><br/>
                                                 President</p>
                                                 <div class="clear"></div>
 	        	                            </div>
@@ -426,92 +454,98 @@ $( document ).ready(function() {
 	                                    <div class="column col7">
     	                                    <div class="dark-gray width256">
                                             	<a href="http://www.northeastern.edu/provost/"><img alt="Director" src="images/orgchart/headshots/director.jpg" class="width122 floatleft"/></a>
-	        	                                <p class="width122 marginleft52percent"> <a href="http://www.northeastern.edu/provost/">Stephen Director</a><br/>
+	        	                                <p class="width122 marginleft52percent"> <span class="name"><a href="http://www.northeastern.edu/provost/">Stephen Director</a></span><br/>
     	                                        Provost &amp; Sr. Vice President for Academic Affairs </p>
         	    	                            <a class="triangle"></a>
             	    	                        <div class="clear"></div>
                                             </div>
 	                                        <div class="light-gray level3column width248">
-    	                                        <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/camd/"><img alt="Costa" src="images/orgchart/headshots/costa.jpg" class="floatleft" /></a>
-        	                                        <p> <a href="http://www.northeastern.edu/camd/">Xavier Costa</a><br/>
+    	                                        <div class="level3box width112 floatleft"><a href="http://www.northeastern.edu/camd/"><img alt="Costa" src="images/orgchart/headshots/costa.jpg" class="floatleft" /></a>
+        	                                        <p> <span class="name"><a href="http://www.northeastern.edu/camd/">Xavier Costa</a></span><br/>
                                                     Dean College of Arts, Media &amp; Design </p>
             	                                </div>
-                	                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img alt="Bernstein" src="images/orgchart/headshots/bernstein.jpg" class="floatleft" /></a>
-                    	                            <p> <a href="http://www.northeastern.edu/">Melvin Bernstein</a><br/>
+                	                            <div class="level3box width112 floatleft"><img alt="Bernstein" src="images/orgchart/headshots/bernstein.jpg" class="floatleft" />
+                    	                            <p><span class="name">Melvin Bernstein</span><br/>
                                                     Sr. Vice Provost Research &amp; Graduate Education </p>
                         	                    </div>
                                                 <div class="clear"></div>
 	                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/dmsb/"><img alt="Courtney" src="images/orgchart/headshots/courtney.jpg" class="floatleft" /></a>
-    	                                            <p> <a href="http://www.northeastern.edu/dmsb/">Hugh Courtney</a><br/>
+    	                                            <p> <span class="name"><a href="http://www.northeastern.edu/dmsb/">Hugh Courtney</a></span><br/>
         	                                            Dean D'Amore-McKim School of Business </p>
             	                                </div>
-                	                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img alt="Loeffelholz" src="images/orgchart/headshots/loeffelholz.jpg" class="floatleft" /></a>
-                    	                            <p> <a href="http://www.northeastern.edu/">Mary Loeffelholz</a><br/>
+                	                            <div class="level3box width112 floatleft"><img alt="Loeffelholz" src="images/orgchart/headshots/loeffelholz.jpg" class="floatleft" />
+                    	                            <p><span class="name">Mary Loeffelholz</span><br/>
                         	                            Vice Provost Academic Affairs </p>
                             	                </div>
                                                 <div class="clear"></div>
                                     	        <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/ccis/"><img alt="Finkelstein" src="images/orgchart/headshots/finkelstein.jpg" class="floatleft" /></a>
-                                        	        <p> <a href="http://www.northeastern.edu/ccis/">Larry Finkelstein</a><br/>
+                                        	        <p> <span class="name"><a href="http://www.northeastern.edu/ccis/">Larry Finkelstein</a></span><br/>
                                                     Dean College of Computer &amp; Information Science </p>
                                             	</div>
-	                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img alt="Ronkin" src="images/orgchart/headshots/ronkin.jpg" class="floatleft" /></a>
-    	                                            <p> <a href="http://www.northeastern.edu/">Bruce Ronkin</a><br/>
+	                                            <div class="level3box width112 floatleft"> <img alt="Ronkin" src="images/orgchart/headshots/ronkin.jpg" class="floatleft" />
+    	                                            <p><span class="name">Bruce Ronkin</span><br/>
                                                     Vice Provost Undergraduate Education </p>
         	                                    </div>
                                                 <div class="clear"></div>
                 	                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/coe/"><img alt="Aubry" src="images/orgchart/headshots/aubry.jpg" class="floatleft" /></a>
-                    	                            <p> <a href="http://www.northeastern.edu/coe/">Nadine Aubry</a><br/>
+                    	                            <p> <span class="name"><a href="http://www.northeastern.edu/coe/">Nadine Aubry</a></span><br/>
                                                     Dean College of Engineering </p>
                         	                    </div>
-                            	                <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img alt="Rini" src="images/orgchart/headshots/rini.jpg" class="floatleft" /></a>
-                                	                <p> <a href="http://www.northeastern.edu/">Anthony Rini</a><br/>
+                            	                <div class="level3box width112 floatleft"><img alt="Rini" src="images/orgchart/headshots/rini.jpg" class="floatleft" />
+                                	                <p><span class="name">Anthony Rini</span><br/>
                                                     Vice Provost Budget, Planning &amp; Administration </p>
                                     	        </div>
                                                 <div class="clear"></div>
                                             	<div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/bouve/"><img alt="Fulmer" src="images/orgchart/headshots/fullmer.jpg" class="floatleft" /></a>
-                                                	<p> <a href="http://www.northeastern.edu/bouve/">Terry Fulmer</a><br/>
+                                                	<p> <span class="name"><a href="http://www.northeastern.edu/bouve/">Terry Fulmer</a></span><br/>
                                                     Dean Bouvé College of Health Sciences </p>
 	                                            </div>
-    	                                        <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Ambrose" src="images/orgchart/headshots/ambrose.jpg" /></a>
-        	                                        <p> <a href="http://www.northeastern.edu/">Susan Ambrose</a><br/>
+    	                                        <div class="level3box width112 floatleft"><img class="floatleft" alt="Ambrose" src="images/orgchart/headshots/ambrose.jpg" />
+        	                                        <p><span class="name">Susan Ambrose</span><br/>
                                                     Sr. Vice Provost Undergraduate Education &amp; Experiential Learning </p>
             	                                </div>
                                                 <div class="clear"></div>
-                    	                        <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="LaBrie" src="images/orgchart/headshots/labrie.jpg" /></a>
-                        	                        <p> <a href="http://www.northeastern.edu/">John G. LaBrie</a><br/>
+                    	                        <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/cps/"><img class="floatleft" alt="LaBrie" src="images/orgchart/headshots/labrie.jpg" /></a>
+                        	                        <p> <span class="name"><a href="http://www.northeastern.edu/cps/">John G. LaBrie</a></span><br/>
                                                     Dean College of Professional Studies &amp; Vice President Professional Education </p>
                             	                </div>
-                                	            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Armendariz" src="images/orgchart/headshots/armendariz.jpg" /></a>
-                                    	            <p> <a href="http://www.northeastern.edu/">John Armendariz</a><br/>
+                                	            <div class="level3box width112 floatleft"><img class="floatleft" alt="Armendariz" src="images/orgchart/headshots/armendariz.jpg" />
+                                    	            <p><span class="name">John Armendariz</span><br/>
                                                     Vice Provost Institutional Diversity &amp; Inclusion </p>
                                         	    </div>
                                                 <div class="clear"></div>
 	                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/cos/"><img class="floatleft" alt="Gibson" src="images/orgchart/headshots/gibson.jpg" /></a>
-    	                                            <p> <a href="http://www.northeastern.edu/dmsb/">J. Murray Gibson</a><br/>
+    	                                            <p> <span class="name"><a href="http://www.northeastern.edu/cos/">J. Murray Gibson</a></span><br/>
                                                     Dean College of Science </p>
         	                                    </div>
             	                                <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/cssh/"><img class="floatleft" alt="Poiger" src="images/orgchart/headshots/poiger.jpg" /></a>
-                                	                <p> <a href="http://www.northeastern.edu/cssh/">Uta G. Poiger</a><br/>
+                                	                <p> <span class="name"><a href="http://www.northeastern.edu/cssh/">Uta G. Poiger</a></span><br/>
                                                     Dean College of Social Sciences &amp; Humanities </p>
                                     	        </div>
-                                        	    <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Wakeling" src="images/orgchart/headshots/wakeling.jpg" /></a>
-                                            	    <p> <a href="http://library.northeastern.edu/">William Wakeling</a><br/>
+                                                <div class="clear"></div>
+                                        	    <div class="level3box width112 floatleft"> <a href="http://library.northeastern.edu/"><img class="floatleft" alt="Wakeling" src="images/orgchart/headshots/wakeling.jpg" /></a>
+                                            	    <p> <span class="name"><a href="http://library.northeastern.edu/">William Wakeling</a></span><br/>
                                                     Dean University Libraries </p>
 	                                            </div>
-                                                <div class="clear"></div>
         	                                    <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/law/"><img class="floatleft" alt="Paul" src="images/orgchart/headshots/paul.jpg" /></a>
-            	                                    <p> <a href="http://www.northeastern.edu/law/">Jeremy Paul</a><br/>
+            	                                    <p> <span class="name"><a href="http://www.northeastern.edu/law/">Jeremy Paul</a></span><br/>
                                                     Dean School of Law </p>
                 	                            </div>
-                    	                        <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Zoloth" src="images/orgchart/headshots/zoloth.jpg" /></a>
-                        	                        <p> <a href="http://www.northeastern.edu/">Stephen Zoloth</a><br/>
+                                                <div class="clear"></div>
+                    	                        <div class="level3box width112 floatleft"><img class="floatleft" alt="Zoloth" src="images/orgchart/headshots/zoloth.jpg" />
+                        	                        <p><span class="name">Stephen Zoloth</span><br/>
                                                     Vice Provost Health Research &amp; Dean Academic Affairs for External Programs </p>
                             	                </div>
-                                                <div class="clear"></div>
-                                    	        <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Bishop" src="images/orgchart/headshots/bishop.jpg" /></a>
-                                        	        <p> <a href="http://www.northeastern.edu/">Donna Bishop</a><br/>
+                                    	        <div class="level3box width112 floatleft"><img class="floatleft" alt="Bishop" src="images/orgchart/headshots/bishop.jpg" />
+                                        	        <p><span class="name">Donna Bishop</span><br/>
                                                     University Ombudsman </p>
                                             	</div>
+                                                <div class="clear"></div>
+                                                <div class="level3box width112 floatleft"><img  class="floatleft" alt="Khan" src="images/orgchart/headshots/khan.jpg" />
+	                                                <p><span class="name">Rehan Khan</span><br/>
+                                                    Vice President &amp; Chief Information Officer<br />
+                                                    *also reports to Sr. Vice President & Chief Operating Officer</p>
+    	                                        </div>
                                                 <div class="clear"></div>
     	                                    </div>
         	                                <div class="clear"></div>
@@ -522,43 +556,44 @@ $( document ).ready(function() {
                                     <!-- COO -->
                                     
                                     <div class="column col7">
-                                        <div class="dark-gray width256"> <a href="http://www.northeastern.edu/"><img alt="Kadish" src="images/orgchart/headshots/kadish.jpg" class="width122 floatleft"/></a>
-                                            <p class="width122 marginleft52percent"> <a href="http://www.northeastern.edu/">Steven Kadish</a><br/>
+                                        <div class="dark-gray width256"><img alt="Kadish" src="images/orgchart/headshots/kadish.jpg" class="width122 floatleft"/>
+                                            <p class="width122 marginleft52percent"><span class="name">Steven Kadish</span><br/>
                                                 Sr. Vice President &amp; Chief Operating Officer</p>
                                             <a class="triangle"></a>
                                             <div class="clear"></div>
                                         </div>
                                         <div class="light-gray level3column width248">
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/facilities/"><img  class="floatleft" alt="May" src="images/orgchart/headshots/may.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/facilities/">Nancy May</a><br/>
+                                            <div class="level3box width112 floatleft"><img  class="floatleft" alt="May" src="images/orgchart/headshots/may.jpg" /></a>
+                                                <p><span class="name">Nancy May</span><br/>
                                                     Vice President Facilities</p>
                                             </div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/hrm/"><img  class="floatleft" alt="Pendergast" src="images/orgchart/headshots/pendergast.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/hrm/">Katherine Pendergast</a><br/>
+                                            <div class="level3box width112 floatleft"><img  class="floatleft" alt="Pendergast" src="images/orgchart/headshots/pendergast.jpg" /></a>
+                                                <p><span class="name">Katherine Pendergast</span><br/>
                                                     Vice President Human Resources Management</p>
                                             </div>
                                             <div class="clear"></div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img  class="floatleft" alt="Pettis" src="images/orgchart/headshots/pettis.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/">Deloris Pettis</a><br/>
+                                            <div class="level3box width112 floatleft"> <img  class="floatleft" alt="Pettis" src="images/orgchart/headshots/pettis.jpg" />
+                                                <p><span class="name">Deloris Pettis</span><br/>
                                                     Vice President Enterprise Risk Management</p>
                                             </div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img  class="floatleft" alt="Spiegelman" src="images/orgchart/headshots/spiegelman.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/">Kathy Spiegelman</a><br/>
+                                            <div class="level3box width112 floatleft"> <img  class="floatleft" alt="Spiegelman" src="images/orgchart/headshots/spiegelman.jpg" />
+                                                <p><span class="name">Kathy Spiegelman</span><br/>
                                                     Vice President and Chief of Campus Planning &amp; Development</p>
                                             </div>
                                             <div class="clear"></div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img  class="floatleft" alt="Mallon" src="images/orgchart/headshots/mallon.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/">Bill Mallon</a><br/>
+                                            <div class="level3box width112 floatleft"> <img  class="floatleft" alt="Mallon" src="images/orgchart/headshots/mallon.jpg" />
+                                                <p><span class="name">Bill Mallon</span><br/>
                                                     Director Business Services</p>
                                             </div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/publicsafety/"><img  class="floatleft" alt="Davis" src="images/orgchart/headshots/davis.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/publicsafety/">Michael Davis</a><br/>
+                                            <div class="level3box width112 floatleft"><img  class="floatleft" alt="Davis" src="images/orgchart/headshots/davis.jpg" />
+                                                <p><span class="name">Michael Davis</span><br/>
                                                     Director Public Safety</p>
                                             </div>
                                             <div class="clear"></div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.infoservices.neu.edu/"><img  class="floatleft" alt="Khan" src="images/orgchart/headshots/khan.jpg" /></a>
-                                                <p> <a href="http://www.infoservices.neu.edu/">Rehan Khan</a><br/>
-                                                    Vice President &amp; Chief Information Officer</p>
+                                            <div class="level3box width112 floatleft"><img  class="floatleft" alt="Khan" src="images/orgchart/headshots/khan.jpg" />
+                                                <p><span class="name">Rehan Khan</span><br/>
+                                                    Vice President &amp; Chief Information Officer<br />
+                                                    *also reports to Provost</p>
                                             </div>
                                             <div class="clear"></div>
                                         </div>
@@ -569,49 +604,49 @@ $( document ).ready(function() {
                                     
                                     <div class="column col7">
                                         <div class="dark-gray width256"> <a href="http://www.northeastern.edu/emsa/"><img alt="Mantella" src="images/orgchart/headshots/mantella2.jpg" class="width122 floatleft"/></a>
-                                            <p class="width122 marginleft52percent"> <a href="http://www.northeastern.edu/emsa/">Philomena Mantella</a><br/>
+                                            <p class="width122 marginleft52percent"><span class="name"><a href="http://www.northeastern.edu/emsa/">Philomena Mantella</a></span><br/>
                                                 Sr. Vice President Enrollment Management &amp; Student Affairs</p>
                                             <a class="triangle"></a>
                                             <div class="clear"></div>
                                         </div>
                                         <div class="light-gray level3column width248">
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Brown" src="images/orgchart/headshots/brown.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/">Jane Brown</a><br/>
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Brown" src="images/orgchart/headshots/brown.jpg" />
+                                                <p><span class="name">Jane Brown</span><br/>
                                                     Vice President Enrollment Management</p>
                                             </div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Wankel" src="images/orgchart/headshots/wankel.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/">Laura A. Wankel</a><br/>
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Wankel" src="images/orgchart/headshots/wankel.jpg" />
+                                                <p><span class="name">Laura A. Wankel</span><br/>
                                                     Vice President Student Affairs</p>
                                             </div>
                                             <div class="clear"></div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Harreys" src="images/orgchart/headshots/harreys.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/">Seamus Harreys</a><br/>
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Harreys" src="images/orgchart/headshots/harreys.jpg" />
+                                                <p><span class="name">Seamus Harreys</span><br/>
                                                     Vice President for Business Affairs &ndash; Graduate Campuses</p>
                                             </div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/charlotte/"><img class="floatleft" alt="Richards" src="images/orgchart/headshots/richards.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/charlotte/">Cheryl Richards</a><br/>
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Richards" src="images/orgchart/headshots/richards.jpg" />
+                                                <p><span class="name">Cheryl Richards</span><br/>
                                                     Charlotte Campus Dean &amp; CEO</p>
                                             </div>
                                             <div class="clear"></div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/seattle/"><img class="floatleft" alt="Washburn" src="images/orgchart/headshots/washburn.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/seattle/">Tayloe Washburn</a><br/>
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Washburn" src="images/orgchart/headshots/washburn.jpg" />
+                                                <p><span class="name">Tayloe Washburn</span><br/>
                                                     Seattle Campus Dean &amp; CEO</p>
                                             </div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Gallagher" src="images/orgchart/headshots/gallagher.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/">Sean Gallagher</a><br/>
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Gallagher" src="images/orgchart/headshots/gallagher.jpg" />
+                                                <p><span class="name">Sean Gallagher</span><br/>
                                                     Sr. Strategist &amp; Market Development Officer</p>
                                             </div>
                                             <div class="clear"></div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Salerno" src="images/orgchart/headshots/salerno.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/">Kerry Salerno</a><br/>
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Salerno" src="images/orgchart/headshots/salerno.jpg" />
+                                                <p><span class="name">Kerry Salerno</span><br/>
                                                     Director Marketing &amp; Communications</p>
                                             </div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Gallivan" src="images/orgchart/headshots/gallivan.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/">Kerry Gallivan</a><br/>
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Gallivan" src="images/orgchart/headshots/gallivan.jpg" />
+                                                <p><span class="name">Kerry Gallivan</span><br/>
                                                     Sr. Director Finance Operations</p>
                                             </div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Roby" src="images/orgchart/headshots/roby.jpg" /></a>
-                                                <p> <a href="http://www.gonu.com/">Peter Roby</a><br/>
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Roby" src="images/orgchart/headshots/roby.jpg" />
+                                                <p><span class="name">Peter Roby</span><br/>
                                                     Director Athletics</p>
                                             </div>
                                             <div class="clear"></div>
@@ -622,24 +657,24 @@ $( document ).ready(function() {
                                     <!-- MARCOM -->
                                     
                                     <div class="column col7">
-                                        <div class="dark-gray width256"> <a href="http://www.northeastern.edu/marcom/"><img alt="Armini" src="images/orgchart/headshots/armini.jpg" class="width122 floatleft"/></a>
-                                            <p class="width122 marginleft52percent"> <a href="http://www.northeastern.edu/marcom/">Michael Armini</a><br/>
+                                        <div class="dark-gray width256"> <a href="http://www.northeastern.edu/externalaffairs/"><img alt="Armini" src="images/orgchart/headshots/armini.jpg" class="width122 floatleft"/></a>
+                                            <p class="width122 marginleft52percent"> <span class="name"><a href="http://www.northeastern.edu/externalaffairs/">Michael Armini</a></span><br/>
                                                 Sr. Vice President External Affairs</p>
                                             <a class="triangle"></a>
                                             <div class="clear"></div>
                                         </div>
                                         <div class="light-gray level3column width248">
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/governmentrelations/"><img class="floatleft" alt="Leshan" src="images/orgchart/headshots/leshan.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/governmentrelations/">Timothy Leshan</a><br/>
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Leshan" src="images/orgchart/headshots/leshan.jpg" />
+                                                <p> <span class="name">Timothy Leshan</span><br/>
                                                     Vice President Government Relations</p>
                                             </div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Masters" src="images/orgchart/headshots/masters.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/">Lucy Masters</a><br/>
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Masters" src="images/orgchart/headshots/masters.jpg" />
+                                                <p> <span class="name">Lucy Masters</span><br/>
                                                     Director Marketing</p>
                                             </div>
                                             <div class="clear"></div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Nyul" src="images/orgchart/headshots/nyul.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/">Renata Nyul</a><br/>
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Nyul" src="images/orgchart/headshots/nyul.jpg" /></a>
+                                                <p> <span class="name">Renata Nyul</span><br/>
                                                     Director Communications</p>
                                             </div>
                                         <div class="clear"></div>
@@ -651,32 +686,32 @@ $( document ).ready(function() {
                                     
                                     <div class="column col7">
                                         <div class="dark-gray width256"> <a href="http://www.northeastern.edu/finance/"><img alt="Nedell" src="images/orgchart/headshots/nedell.jpg" class="width122 floatleft"/></a>
-                                            <p class="width122 marginleft52percent"> <a href="http://www.northeastern.edu/finance/">Thomas Nedell</a><br/>
+                                            <p class="width122 marginleft52percent"> <span class="name"><a href="http://www.northeastern.edu/finance/">Thomas Nedell</a></span><br/>
                                                 Vice President and Chief Financial Officer</p>
                                             <a class="triangle"></a>
                                             <div class="clear"></div>
                                         </div>
                                         <div class="light-gray level3column width248">
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Solomon" src="images/orgchart/headshots/solomon.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/">Sam Solomon</a><br/>
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Solomon" src="images/orgchart/headshots/solomon.jpg" />
+                                                <p> <span class="name">Sam Solomon</span><br/>
                                                     Treasurer</p>
                                             </div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Condell" src="images/orgchart/headshots/condell.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/">Greg Condell</a><br/>
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Condell" src="images/orgchart/headshots/condell.jpg" />
+                                                <p> <span class="name">Greg Condell</span><br/>
                                                     Associate Vice President Finance</p>
                                             </div>
                                             <div class="clear"></div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Waggett" src="images/orgchart/headshots/waggatt.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/">Theresa Waggett</a><br/>
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Waggett" src="images/orgchart/headshots/waggatt.jpg" />
+                                                <p> <span class="name">Theresa Waggett</span><br/>
                                                     University Controller</p>
                                             </div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Stewart" src="images/orgchart/headshots/stewart.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/">Donald Stewart</a><br/>
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Stewart" src="images/orgchart/headshots/stewart.jpg" />
+                                                <p> <span class="name">Donald Stewart</span><br/>
                                                     Director Budget</p>
                                             </div>
                                             <div class="clear"></div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Wood" src="images/orgchart/headshots/wood.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/">Patricia Wood</a><br/>
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Wood" src="images/orgchart/headshots/wood.jpg" />
+                                                <p> <span class="name">Patricia Wood</span><br/>
                                                     Director Internal Audit</p>
                                             </div>
                                         <div class="clear"></div>
@@ -688,27 +723,27 @@ $( document ).ready(function() {
                                     
                                     <div class="column col7">
                                         <div class="dark-gray width256"> <a href="http://www.northeastern.edu/general-counsel/"><img alt="Martin" src="images/orgchart/headshots/martin.jpg" class="width122 floatleft"/></a>
-                                            <p class="width122 marginleft52percent"> <a href="http://www.northeastern.edu/general-counsel/">Ralph Martin</a><br/>
+                                            <p class="width122 marginleft52percent"> <span class="name"><a href="http://www.northeastern.edu/general-counsel/">Ralph Martin</a></span><br/>
                                                 Sr. Vice President &amp; General Counsel</p>
                                             <a class="triangle"></a>
                                             <div class="clear"></div>
                                         </div>
                                         <div class="light-gray level3column width248">
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Lembo" src="images/orgchart/headshots/lembo.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/">Vincent Lembo</a><br/>
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Lembo" src="images/orgchart/headshots/lembo.jpg" />
+                                                <p><span class="name">Vincent Lembo</span><br/>
                                                     Vice President &amp; Sr. Counsel</p>
                                             </div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Sinclair" src="images/orgchart/headshots/sinclair.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/">Lisa Sinclair</a><br/>
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Sinclair" src="images/orgchart/headshots/sinclair.jpg" />
+                                                <p><span class="name">Lisa Sinclair</span><br/>
                                                     Associate Vice President &amp; Deputy General Counsel</p>
                                             </div>
                                             <div class="clear"></div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Tobin" src="images/orgchart/headshots/tobin.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/">John Tobin</a><br/>
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Tobin" src="images/orgchart/headshots/tobin.jpg" />
+                                                <p><span class="name">John Tobin</span><br/>
                                                     Vice President City &amp; Community Affairs</p>
                                             </div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Gittens" src="images/orgchart/headshots/gittens.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/">Robert Gittens</a><br/>
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Gittens" src="images/orgchart/headshots/gittens.jpg" />
+                                                <p><span class="name">Robert Gittens</span><br/>
                                                     Vice President Public Affairs</p>
                                             </div>
                                         <div class="clear"></div>
@@ -720,32 +755,32 @@ $( document ).ready(function() {
                                     
                                     <div class="column col7">
                                         <div class="dark-gray width256"> <a href="http://www.northeastern.edu/empower/"><img alt="MacGillivray" src="images/orgchart/headshots/macgillivray.jpg" class="width122 floatleft"/></a>
-                                            <p class="width122 marginleft52percent"> <a href="http://www.northeastern.edu/empower/">Diane MacGillivray</a><br/>
+                                            <p class="width122 marginleft52percent"> <span class="name"><a href="http://www.northeastern.edu/empower/">Diane MacGillivray</a></span><br/>
                                                 Sr. Vice President University Advancement</p>
                                             <a class="triangle"></a>
                                             <div class="clear"></div>
                                         </div>
                                         <div class="light-gray level3column width248">
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Kirwin" src="images/orgchart/headshots/kirwin.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/">Luanne M. Kirwin</a><br/>
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Kirwin" src="images/orgchart/headshots/kirwin.jpg" />
+                                                <p> <span class="name">Luanne M. Kirwin</span><br/>
                                                     Vice President Development</p>
                                             </div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Moynihan" src="images/orgchart/headshots/moynihan.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/">Jack Moynihan</a><br/>
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Moynihan" src="images/orgchart/headshots/moynihan.jpg" />
+                                                <p> <span class="name">Jack Moynihan</span><br/>
                                                     Vice President Alumni Relations &amp; The Northeastern Fund</p>
                                             </div>
                                             <div class="clear"></div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Dietrich" src="images/orgchart/headshots/dietrich.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/">Robert Dietrich</a><br/>
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Dietrich" src="images/orgchart/headshots/dietrich.jpg" />
+                                                <p> <span class="name">Robert Dietrich</span><br/>
                                                     Associate Vice President Interdisciplinary Initiatives &amp; Special Projects</p>
                                             </div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Donnelly Jr." src="images/orgchart/headshots/donnelly.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/">Joseph Donnelly, Jr.</a><br/>
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Donnelly Jr." src="images/orgchart/headshots/donnelly.jpg" />
+                                                <p> <span class="name">Joseph Donnelly, Jr.</span><br/>
                                                     Vice President Campaign Director</p>
                                             </div>
                                             <div class="clear"></div>
-                                            <div class="level3box width112 floatleft"> <a href="http://www.northeastern.edu/"><img class="floatleft" alt="Kenneally" src="images/orgchart/headshots/kenneally.jpg" /></a>
-                                                <p> <a href="http://www.northeastern.edu/">Timothy Kenneally</a><br/>
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Kenneally" src="images/orgchart/headshots/kenneally.jpg" />
+                                                <p> <span class="name">Timothy Kenneally</span><br/>
                                                     Assistant Vice President, Finance &amp; Operations</p>
                                             </div>
                                         <div class="clear"></div>

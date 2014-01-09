@@ -108,9 +108,13 @@ a, a:link, a:visited, a:hover, a:active {
 	background-repeat:repeat-y;
 }
 
-.light-gray a, .medium-gray a, .dark-gray a {
+.name {
 	font-family: "HelveticaNeueW01-77BdCn 692722",Helvetica,Verdana,Arial,sans-serif;
 	font-size: 11px;
+}
+
+.light-gray a, .medium-gray a, .dark-gray a, .name a, .name a, .name a {
+	font-family: "HelveticaNeueW01-77BdCn 692722",Helvetica,Verdana,Arial,sans-serif;
 }
 
 .medium-gray.topbox a {
@@ -141,12 +145,11 @@ a, a:link, a:visited, a:hover, a:active {
 	margin-left: 47px;
 }
 
-/*************************************************************************************************************************
-* LAYOUT #4 LAYOUT #4 LAYOUT #4 LAYOUT #4 LAYOUT #4 LAYOUT #4 LAYOUT #4 LAYOUT #4 *LAYOUT #4 LAYOUT #4 LAYOUT #4 LAYOUT #4 *
-*************************************************************************************************************************/ 
 
-
-/*      Mobile Layout: 320px.
+/*
+MOBILE LAYOUT
+      
+		Mobile Layout: screens under 998px
         Gutters: 24px.
         Outer margins: 34px.
         Inherits styles from: Default Layout.
@@ -158,6 +161,14 @@ px      68    160    252    */
 	
 .col1, .col2, .col3, .col4, .col5, .col6, .col7, .col8 {
 	width: 100%;
+}
+
+.nav-btn {
+	background-color: transparent !important;
+}
+
+#bottom-full-width {
+	margin-top: 0;
 }
 
 #bottom-full-width #main-column #main-content {
@@ -209,7 +220,7 @@ px      68    160    252    */
 	font-size: 14px;
 }
 
-.light-gray a, .medium-gray a, .dark-gray a {
+.light-gray a, .medium-gray a, .dark-gray a, .name {
 	font-size: 18px;
 }
 
@@ -234,7 +245,7 @@ px      68    160    252    */
 	margin: 0 auto;
 }
 
-.block {
+.display-block {
 	display: block;
 }
 
@@ -355,11 +366,10 @@ a.triangle.up {
 
 }
 
-/*************************************************************************************************************************
-* LAYOUT #3 LAYOUT #3 LAYOUT #3 LAYOUT #3 LAYOUT #3 LAYOUT #3 LAYOUT #3 LAYOUT #3 LAYOUT #3 LAYOUT #3 LAYOUT #3 *
-*************************************************************************************************************************/ 
-
-/*      Wide Mobile Layout: 480px.
+/*
+CORRECTIONS
+*/
+/*		Layout: 767px - 997px
         Gutters: 24px.
         Outer margins: 22px.
         Inherits styles from: Default Layout, Mobile Layout.
@@ -367,9 +377,10 @@ a.triangle.up {
 cols    1     2      3      4      5
 px      68    160    252    344    436    */
 
-@media only screen and (min-width: 480px) and (max-width: 767px) {
+@media only screen and (min-width: 768px) and (max-width: 997px) {
 	
-
-
+#interior-heading {
+	margin-top: 18px;
+}
 
 }
