@@ -20,75 +20,9 @@
 <link href="css/chart.css" rel="stylesheet" type="text/css"/>
 <link href="../../../css/mobile-nav.css" media="screen" rel="stylesheet" type="text/css"/>
 <script src="http://www.northeastern.edu/scripts/modernizr.js" type="text/javascript"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript">
-</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script src="http://www.northeastern.edu/scripts/top-nav.js" type="text/javascript"></script>
-<script type="text/javascript">
-var waitForFinalEvent = (function () {
-	var timers = {};
-	return function (callback, ms, uniqueId) {
-		if (!uniqueId) {
-			uniqueId = "Don't call this twice without a uniqueId";
-		}
-		if (timers[uniqueId]) {
-			clearTimeout (timers[uniqueId]);
-		}
-		timers[uniqueId] = setTimeout(callback, ms);
-	};
-})();
-
-function hideLevelThree() {
-	$(".level3column").hide();
-}
-function showLevelThree() {
-	$(".level3column").show();
-}
-
-function controlColumn() {
-	$('.triangle').click(function() {
-		if ($(this).hasClass('up')) {
-			$(this).removeClass('up');
-			$(this).parents('.dark-gray').next().slideUp();
-		} else {
-			$(this).addClass('up');
-			$(this).parents('.dark-gray').next().slideDown();
-		}
-	});
-}
-
-function toggleColumn() {
-	$('.triangle').not(".binded").addClass("binded").click(function() {
-		$(this).toggleClass('up');
-		$(this).parents('.dark-gray').next().toggle();
-	});
-}
-
-function clearUp() {
-	$('.triangle').removeClass('up');
-}
-
-$(document).ready(function() {
-	if ($(document).width() > 991) {
-		showLevelThree();
-		clearUp();
-	} else {
-		hideLevelThree();
-		toggleColumn();
-	}
-});		
-
-$(window).resize(function () {
-	waitForFinalEvent(function(){
-		if ($(document).width() > 991) {
-			showLevelThree();
-			clearUp();
-		} else {
-			hideLevelThree();
-			toggleColumn();
-		}
-	}, 500, "some unique string");
-});
-</script>
+<script src="scripts/orgchart.js" type="text/javascript"></script>
 <script src="http://www.google.com/jsapi?key=ABQIAAAA780chNBk5tiRKRznXzEY7xSxdZHYPQylHhIz0QB7o5q20wZANRT7zKV0vSe8OLWkSnyFORSqcquYig" type="text/javascript">
 </script>
 <script src="http://www.northeastern.edu/scripts/googleSearch.js" type="text/javascript"></script>
@@ -439,7 +373,7 @@ $(window).resize(function () {
                             <div id="Administration">
                             	<div id="top-row">
                                 	<div id="wrapper">
-                                		<div class="column col5">
+                                		<div class="column col6">
 	                                    	<div class="medium-gray topbox width122"> <a href="http://www.northeastern.edu/president/"><img alt="Aoun" src="images/orgchart/headshots/aoun.jpg" class="width122 display-block" /></a>
     	                                    	<p class="width122"><span class="name"><a href="http://www.northeastern.edu/president/">Joseph E. Aoun</a></span><br/>
                                                 President</p>
@@ -705,7 +639,7 @@ $(window).resize(function () {
                                                 <p> <span class="name">Theresa Waggett</span><br/>
                                                     University Controller</p>
                                             </div>
-                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Stewart" src="images/orgchart/headshots/stewart.jpg" />
+                                            <div class="level3box width112 floatleft"> <img class="floatleft" alt="Stewart" src="images/orgchart/headshots/stewart_d.jpg" />
                                                 <p> <span class="name">Donald Stewart</span><br/>
                                                     Director Budget</p>
                                             </div>
